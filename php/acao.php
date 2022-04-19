@@ -137,4 +137,12 @@
         return exibir(array('pf_id', 'pf_nome'), $lista);
 
     }
+
+    require_once("../classes/ContaCorrente.class.php");
+    function lista_conta($id){
+        $pessoaFisica = new ContaCorrente("","","","");
+        $lista = $pessoaFisica->buscarConta($id);
+        return exibir(array('cc_numero', 'cc_numero'), $lista);
+
+    }
 ?>

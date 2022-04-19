@@ -39,13 +39,10 @@
         <br>
         <label class="formItem formText" id="">Conta corrente:</label>
         <select class="form-select" aria-label="Escolha a conta" name="cc_numero" value="">
-        <?php    
-            $pdo = Conexao::getInstance();
-            $consulta = $pdo->query("SELECT * FROM conta_corrente");
-            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-        ?>
-            <option name="" value="<?php echo $linha['cc_numero']; ?>" <?php if ($comando == "update" && $linha['cc_numero'] == $dados['cc_numero']){echo "selected";}?>><?php echo $linha['cc_numero'];?></option>
-        <?php } ?>
+            <?php
+                require_once("acao.php");
+                echo lista_conta(0);
+            ?>
         </select>
         <br>
         <div class="form-group">

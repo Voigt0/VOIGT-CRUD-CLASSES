@@ -102,7 +102,23 @@
             $stmt->execute();
             return $stmt->execute();
         }
-                
+           
+        public function buscarConta($id){
+            require_once("../conf/Conexao.php");
+            $conexao = Conexao::getInstance();
+            $query = 'SELECT * FROM conta_corrente';
+            if($id > 0){
+                $query .= ' WHERE cc_numero = :cc_numero';
+                $stmt->bindParam(':cc_numero', $id);
+            }
+                $stmt = $conexao->prepare($query);
+                if($stmt->execute())
+                    return $stmt->fetchAll();
+        
+                return false;
+
+        }
+
         public function saque($valor){
             $pdo = Conexao::getInstance();
             $cc_saldo = floatval ($this->setSaldo($this->saldo)) - floatval($valor);

@@ -16,20 +16,32 @@
                 $this->setPfId($pf_id);
             }
 
-            public function setId($newid) {
-                return $this->id = $newid;
+            public function setId($newId) {
+            // if ($newNumero > 0  && $newNumero <> "")
+                return $this->id = $newId;
+            // else 
+                // throw new Exception("Número: ".$newNumero);
             }
 
-            public function setTipo($newtipo) {
-                return $this->tipo = $newtipo;
+            public function setTipo($newTipo) {
+            // if ($newNumero > 0  && $newNumero <> "")
+                return $this->tipo = $newTipo;
+            // else 
+                // throw new Exception("Número: ".$newNumero);
             }
             
-            public function setDescricao($descricao) {
-                return $this->descricao = $descricao;
+            public function setDescricao($newDescricao) {
+            // if ($newNumero > 0  && $newNumero <> "")
+                return $this->descricao = $newDescricao;
+            // else 
+                // throw new Exception("Número: ".$newNumero);
             }
 
             public function setPfId($pf_id) {
+            // if ($newNumero > 0  && $newNumero <> "")
                 return $this->pf_id = $pf_id;
+            // else 
+                // throw new Exception("Número: ".$newNumero);
             }
 
             public function getId() {

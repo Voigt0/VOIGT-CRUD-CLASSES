@@ -16,19 +16,31 @@
         }
 
         public function setNumero($newNumero) {
-            return $this->numero = $newNumero;
+            // if ($newNumero > 0  && $newNumero <> "")
+                return $this->numero = $newNumero;
+            // else 
+                // throw new Exception("Número: ".$newNumero);
         }
 
-        public function setSaldo($newsaldo) {
-            return $this->saldo = $newsaldo;
+        public function setSaldo($newSaldo) {
+            // if ($newSaldo > 0  && $newSaldo <> "")
+                return $this->saldo = $newSaldo;
+            // else 
+                // throw new Exception("Número do ID: ".$newSaldo);
         }
 
         public function setPfId($pf_id) {
-            return $this->pf_id = $pf_id;
+            // if ($pf_id > 0  && $pf_id <> "")
+                return $this->pf_id = $pf_id;
+            // else 
+                // throw new Exception("ID Pessoa Física: ".$pf_id);
         }
             
-        public function setUltalter($ultalter) {
-            return $this->ultalter = $ultalter;
+        public function setUltalter($newUltalter) {
+            // if ($newUltalter > 0  && $newUltalter <> "")
+                return $this->ultalter = $newUltalter;
+            // else 
+                // throw new Exception("Última alteração: ".$newUltalter);
         }
 
         public function getNumero() {
@@ -93,21 +105,21 @@
                 
         public function saque($valor){
             $pdo = Conexao::getInstance();
-            $cc_saldo = $this->setSaldo($this->saldo) - $valor;
+            $cc_saldo = floatval ($this->setSaldo($this->saldo)) - floatval($valor);
             $stmt = $pdo->prepare("UPDATE `prova`.`Conta_corrente` SET `cc_saldo` = $cc_saldo, `cc_pf_id` = :cc_pf_id, `cc_dt_ultima_alteracao` = :cc_dt_ultima_alteracao WHERE (`cc_numero` = :cc_numero);");
-            $stmt->bindParam(':cc_numero', $this->setNumero($this->numero), PDO::PARAM_INT);
-            $stmt->bindParam(':cc_pf_id', $this->setPfId($this->id), PDO::PARAM_STR);
-            $stmt->bindParam(':cc_dt_ultima_alteracao', date("d/m/Y"), PDO::PARAM_STR);
+            $stmt->bindValue(':cc_numero', $this->setNumero($this->numero), PDO::PARAM_INT);
+            $stmt->bindValue(':cc_pf_id', $this->setPfId($this->pf_id), PDO::PARAM_STR);
+            $stmt->bindValue(':cc_dt_ultima_alteracao', date("d/m/Y"), PDO::PARAM_STR);
             return $stmt->execute();
         }
 
         public function deposito($valor){
             $pdo = Conexao::getInstance();
-            $cc_saldo = $this->setSaldo($this->saldo) + $valor;
+            $cc_saldo = floatval ($this->setSaldo($this->saldo)) + floatval($valor);
             $stmt = $pdo->prepare("UPDATE `prova`.`Conta_corrente` SET `cc_saldo` = $cc_saldo, `cc_pf_id` = :cc_pf_id, `cc_dt_ultima_alteracao` = :cc_dt_ultima_alteracao WHERE (`cc_numero` = :cc_numero);");
-            $stmt->bindParam(':cc_numero', $this->setNumero($this->numero), PDO::PARAM_INT);
-            $stmt->bindParam(':cc_pf_id', $this->setPfId($this->id), PDO::PARAM_STR);
-            $stmt->bindParam(':cc_dt_ultima_alteracao', date("d/m/Y"), PDO::PARAM_STR);
+            $stmt->bindValue(':cc_numero', $this->setNumero($this->numero), PDO::PARAM_INT);
+            $stmt->bindValue(':cc_pf_id', $this->setPfId($this->pf_id), PDO::PARAM_STR);
+            $stmt->bindValue(':cc_dt_ultima_alteracao', date("d/m/Y"), PDO::PARAM_STR);
             return $stmt->execute();
         }
     }

@@ -10,19 +10,23 @@
 
     function acao($acao, $seletor){
         if($seletor == "operacao"){
-            require_once "ContaCorrente.class.php";
+            require_once "../classes/ContaCorrente.class.php";
             if($_POST['cc_operacao'] == "saque"){
-                $contaCorrente = new ContaCorrente($_POST['cc_numero'], "", $_POST['cc_pf_id'], "");
+                $dados;
+                $dados = buscarDados($_POST['cc_numero'], "ContaCorrente");
+                $contaCorrente = new ContaCorrente($_POST['cc_numero'], $dados['cc_saldo'], $_POST['cc_pf_id'], "");
                 $contaCorrente->saque($_POST['cc_valor']);
                 header("location:tabelaContaCorrente.php");
             } else if($_POST['cc_operacao'] == "deposito"){
-                $contaCorrente = new ContaCorrente($_POST['cc_numero'], "", $_POST['cc_pf_id'], "");
+                $dados;
+                $dados = buscarDados($_POST['cc_numero'], "ContaCorrente");
+                $contaCorrente = new ContaCorrente($_POST['cc_numero'], $dados['cc_saldo'], $_POST['cc_pf_id'], "");
                 $contaCorrente->deposito($_POST['cc_valor']);
                 header("location:tabelaContaCorrente.php");
             }
         }
 
-        if($seletor == "PessoaFisica"){
+        else if($seletor == "PessoaFisica"){
             require_once "../classes/PessoaFisica.class.php";
         } else if($seletor == "ContaCorrente"){
             require_once "../classes/ContaCorrente.class.php";
@@ -30,6 +34,7 @@
             require_once "../classes/Contatos.class.php";
         }
         if($acao == "insert"){
+            try{
             if($seletor == "PessoaFisica"){
                 $pessoaFisica = new PessoaFisica("", $_POST['pf_cpf'], $_POST['pf_nome'], $_POST['pf_dt_nascimento'],);
                 $pessoaFisica->inserir();
@@ -43,7 +48,12 @@
                 $contatos->inserir();
                 header("location:tabelaContatos.php");
             }
+        } catch(Exception $e){
+            echo "<h1>Erro ao cadastrar a conta.</h1>
+            <br> Erro:".$e->getMessage();
+        }
         } else if($acao == "deletar"){
+        try{
             if($seletor == "PessoaFisica"){
                 $pessoaFisica = new PessoaFisica($_GET['id'], "", "", "");
                 $pessoaFisica->deletar();
@@ -57,7 +67,12 @@
                 $contatos->deletar();
                 header("location:tabelaContatos.php");
             }
+        } catch(Exception $e){
+            echo "<h1>Erro ao cadastrar a conta.</h1>
+            <br> Erro:".$e->getMessage();
+        }
         } else if($acao == "update"){
+        try{
             if($seletor == "PessoaFisica"){
                 $pessoaFisica = new PessoaFisica($_POST['id'], $_POST['pf_cpf'], $_POST['pf_nome'],  $_POST['pf_dt_nascimento']);
                 $pessoaFisica->atualizar();
@@ -71,6 +86,10 @@
                 $contatos->atualizar();
                 header("location:tabelaContatos.php");
             }
+        } catch(Exception $e){
+            echo "<h1>Erro ao cadastrar a conta.</h1>
+            <br> Erro:".$e->getMessage();
+        }
         }
     }
 

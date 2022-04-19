@@ -16,19 +16,31 @@
             }
 
             public function setId($newId) {
+            // if ($newNumero > 0  && $newNumero <> "")
                 return $this->id = $newId;
+            // else 
+                // throw new Exception("Número: ".$newNumero);
             }
 
             public function setCpf($newCpf) {
+            // if ($newNumero > 0  && $newNumero <> "")
                 return $this->cpf = $newCpf;
+            // else 
+                // throw new Exception("Número: ".$newNumero);
             }
 
             public function setNome($newNome) {
+            // if ($newNumero > 0  && $newNumero <> "")
                 return $this->nome = $newNome;
+            // else 
+                // throw new Exception("Número: ".$newNumero);
             }
 
             public function setNascimento($newNascimento) {
+            // if ($newNumero > 0  && $newNumero <> "")
                 return $this->nascimento = $newNascimento;
+            // else 
+                // throw new Exception("Número: ".$newNumero);
             }
 
             public function getId() {

@@ -16,7 +16,7 @@
     require_once "../conf/Conexao.php";
     include_once "acao.php";
     $comando = isset($_GET['comando']) ? $_GET['comando'] : "";
-    $tabela = "operacao";
+    $seletor = "operacao";
     $cc_numero = isset($_POST['cc_numero']) ? $_POST['cc_numero'] : "";
     $cc_pf_id = isset($_POST['cc_pf_id']) ? $_POST['cc_pf_id'] : "";
     $cc_operacao = isset($_POST['cc_operacao']) ? $_POST['cc_operacao'] : "";
@@ -40,7 +40,6 @@
         <label class="formItem formText" id="">Conta corrente:</label>
         <select class="form-select" aria-label="Escolha a conta" name="cc_numero" value="">
             <?php
-                require_once("acao.php");
                 echo lista_conta(0);
             ?>
         </select>

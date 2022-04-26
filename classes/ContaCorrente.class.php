@@ -125,7 +125,7 @@
             $stmt = $pdo->prepare("UPDATE `prova`.`Conta_corrente` SET `cc_saldo` = $cc_saldo, `cc_pf_id` = :cc_pf_id, `cc_dt_ultima_alteracao` = :cc_dt_ultima_alteracao WHERE (`cc_numero` = :cc_numero);");
             $stmt->bindValue(':cc_numero', $this->setNumero($this->numero), PDO::PARAM_INT);
             $stmt->bindValue(':cc_pf_id', $this->setPfId($this->pf_id), PDO::PARAM_STR);
-            $stmt->bindValue(':cc_dt_ultima_alteracao', date("d/m/Y"), PDO::PARAM_STR);
+            $stmt->bindValue(':cc_dt_ultima_alteracao', date("Y-m-d"), PDO::PARAM_STR);
             return $stmt->execute();
         }
 
@@ -135,7 +135,7 @@
             $stmt = $pdo->prepare("UPDATE `prova`.`Conta_corrente` SET `cc_saldo` = $cc_saldo, `cc_pf_id` = :cc_pf_id, `cc_dt_ultima_alteracao` = :cc_dt_ultima_alteracao WHERE (`cc_numero` = :cc_numero);");
             $stmt->bindValue(':cc_numero', $this->setNumero($this->numero), PDO::PARAM_INT);
             $stmt->bindValue(':cc_pf_id', $this->setPfId($this->pf_id), PDO::PARAM_STR);
-            $stmt->bindValue(':cc_dt_ultima_alteracao', date("d/m/Y"), PDO::PARAM_STR);
+            $stmt->bindValue(':cc_dt_ultima_alteracao', date("Y-m-d"), PDO::PARAM_STR);
             return $stmt->execute();
         }
     }
